@@ -1,0 +1,37 @@
+# Every ~6 months, Time Machine will think it needs to start from scratch because the contents on FreeNAS are corrupt.
+# This is how I've repaired the TM sparsebundle without losing history.
+# (source: http://jd-powered.net/notes/fixing-your-time-machine-backup)
+
+sudo su - 
+
+chflags -R nouchg /Volumes/Dave\ Time\ Machine/Daves\ MacBook\ Pro.sparsebundle
+
+hdiutil attach -nomount -noverify -noautofsck -readwrite /Volumes/Dave\ Time\ Machine/Daves\ MacBook\ Pro.sparsebundle
+
+# This command will return something like this:
+# /dev/diskX Apple_partition_scheme
+# /dev/diskXs1 Apple_partition_map
+# /dev/diskXs2 Apple_HFS
+
+# Record X from Apple_HFS(X)?
+
+fsck_hfs -drfy /dev/diskXs2
+
+hdiutil detach /dev/diskXs2
+
+vi /Volumes/Dave\ Time\ Machine/Daves\ MacBook\ Pro.sparsebundle/com.apple.TimeMachine.MachineID.plist
+
+# Remove:
+<key>RecoveryBackupDeclinedDate</key>
+<date>{any-date-string}</date>s
+
+# Change:
+<key>VerificationState</key>
+<integer>2</integer>
+
+# To: 
+<key>VerificationState</key>
+<integer>0</integer>
+
+
+
