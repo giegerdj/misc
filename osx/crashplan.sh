@@ -13,7 +13,7 @@ CRASHPLAN_KEY="~/.ssh/crashplan_rsa"
 sudo cp /Library/Application\ Support/CrashPlan/.ui_info /Library/Application\ Support/CrashPlan/LOCAL.ui_info
 
 echo "Starting Crashplan VM in FreeNAS"
-ssh $FREENAS_VBOX_USER@$FREENAS_VBOX_SERVER 'VBoxManage startvm crashplan --type headless'
+ssh freenas-vbox 'VBoxManage startvm crashplan --type headless'
 echo "Crashplan VM started"
 
 echo "Waiting (naively) 15 seconds for the crashplan service to start"
@@ -50,7 +50,7 @@ sudo mv /Library/Application\ Support/CrashPlan/LOCAL.ui_info /Library/Applicati
 read -r -p "Shut down Crashplan VM? [y/N] " yn
 case $yn in
     [yY][eE][sS]|[yY])
-        ssh $FREENAS_VBOX_USER@$FREENAS_VBOX_SERVER 'VBoxManage controlvm crashplan savestate';
+        ssh freenas-vbox 'VBoxManage controlvm crashplan acpipowerbutton';
         ;;
     *)
         ;;
