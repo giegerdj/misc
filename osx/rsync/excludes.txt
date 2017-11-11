@@ -1,0 +1,15 @@
+.Spotlight-*/
+.Trashes
+*/.Trash
+*/.git/
+.cache/
+Downloads/
+.composer/
+.npm/
+.vagrant.d/
+VirtualBox\ VMs/*
+Library/Application\ Support/*
+.rbenv/
+.rvm/
+.heroku/
+.bash_sessions/*
