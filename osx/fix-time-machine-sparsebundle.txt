@@ -4,9 +4,9 @@
 
 sudo su - 
 
-chflags -R nouchg /Volumes/Dave\ Time\ Machine/Daves\ MacBook\ Pro.sparsebundle
+chflags -R nouchg /Volumes/iMac\ Time\ Machine/Daves\ iMac.sparsebundle
 
-hdiutil attach -nomount -noverify -noautofsck -readwrite /Volumes/Dave\ Time\ Machine/Daves\ MacBook\ Pro.sparsebundle
+hdiutil attach -nomount -noverify -noautofsck -readwrite /Volumes/iMac\ Time\ Machine/Daves\ iMac.sparsebundle
 
 # This command will return something like this:
 # /dev/diskX Apple_partition_scheme
@@ -19,7 +19,7 @@ fsck_hfs -drfy /dev/diskXs2
 
 hdiutil detach /dev/diskXs2
 
-vi /Volumes/Dave\ Time\ Machine/Daves\ MacBook\ Pro.sparsebundle/com.apple.TimeMachine.MachineID.plist
+vi /Volumes/iMac\ Time\ Machine/Daves\ iMac.sparsebundle/com.apple.TimeMachine.MachineID.plist
 
 # Remove:
 <key>RecoveryBackupDeclinedDate</key>
